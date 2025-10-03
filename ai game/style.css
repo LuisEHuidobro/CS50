@@ -1,0 +1,255 @@
+/* ==============================
+   Global Styles
+============================== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #111;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* ==============================
+   Header
+============================== */
+header {
+  padding: 10px;
+  background-color: #222;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  flex-basis: 100%;
+  text-align: left;
+  margin: 5px 0;
+}
+
+#resources span {
+  margin: 0 10px;
+}
+
+
+/* ==============================
+   Train Button
+============================== */
+#btn-train {
+  font-size: 24px;
+  padding: 20px 40px;
+  margin: 20px auto;
+  display: block;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#btn-train:hover {
+  background-color: #45a049;
+}
+
+/* ==============================
+   Upgrades & Stage Panels
+============================== */
+#upgrades, #stage2-menu {
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: #222;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.upgrade-btn {
+  display: block;
+  margin: 6px 0;
+  padding: 10px 15px;
+  background-color: #555;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.upgrade-btn:hover:not(:disabled) {
+  background-color: #666;
+}
+
+.upgrade-btn:disabled {
+  background-color: #333;
+  cursor: not-allowed;
+}
+
+/* ==============================
+   Story Log (Right Fixed)
+============================== */
+#story-log {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  width: 320px;
+  height: 400px;
+  background-color: rgba(0,0,0,0.85);
+  color: #eee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.2em;
+  z-index: 10;
+}
+
+#story-log h2 {
+  padding: 8px;
+  background-color: rgba(0,0,0,0.9);
+  font-size: 16px;
+  border-bottom: 1px solid #444;
+  flex-shrink: 0;
+}
+
+#story-log #log {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5px;
+  overflow: hidden;
+}
+
+#story-log #log p {
+    margin: 4px 0; /* restores spacing between flavor messages */
+}
+/* ==============================
+   Stats Panel (Left Fixed)
+============================== */
+#stats-panel {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  width: 240px;
+  background-color: rgba(50,50,50,0.9);
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  z-index: 5;
+}
+
+#stats-panel h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#stats-panel p {
+    margin: 10px 0; /* restores vertical spacing between stat lines */
+}
+
+#stats-panel p span {
+    padding-left: 4px;
+}
+
+/* ==============================
+   Neural Network Dashboard
+============================== */
+#stage2-menu {
+  display: none; /* unlocked by JS */
+  border: 2px solid #4CAF50;
+}
+
+#stage2-menu h2 {
+  margin-bottom: 10px;
+}
+
+#nnd-upgrades {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#nnd-upgrades button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #555;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+#nnd-upgrades button:hover {
+  background-color: #666;
+}
+
+/* Branch choice buttons grouped */
+#branch-choices {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+#branch-choices button {
+  flex: 1;
+  padding: 10px;
+  background-color: #444;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#branch-choices button:hover {
+  background-color: #555;
+}
+
+/* ==============================
+   Responsive Layout
+============================== */
+@media (max-width: 1200px) {
+  #story-log {
+    width: 260px;
+    height: 300px;
+  }
+
+  #stats-panel {
+    width: 200px;
+  }
+}
+
+@media (max-width: 800px) {
+  #story-log, #stats-panel {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+
+/* ==============================
+   Misc Styling
+============================== */
+button:focus {
+  outline: none;
+}
+
+#main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 100px; /* space for log */
+}
