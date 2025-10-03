@@ -1,4 +1,3 @@
-// ====== Game State ======
 let state = {
     data: 0,
     employees: 0,
@@ -17,6 +16,8 @@ let state = {
     milestones: {},
     clickMultiplier: 1,
     dataCap: 10000,
+    dataCapMultiplier: 1,
+    passiveMultiplier: 1,
     users: 0,
     moderation: 1,
     aiCompetitors: [
@@ -24,15 +25,15 @@ let state = {
         {name:"DeepCore", data:0, rate:0.3}
     ],
     marketingMultiplier: 1,
-    dataMultiplier : 1, // 100% by default
-    dataInterval : 2000, // 2 seconds by default
+    dataMultiplier : 1,
+    dataInterval : 2000,
 
 };
 
 // Stage 2
 state.stage2 = { branchChosen: null };
 
-// ====== Flavor / MQ Phases ======
+// MQ Phases
 const mqPhases = [
   { threshold: 50, text: "Your AI takes its first steps." },
   { threshold: 2500, text: "Data is flowing; models become coherent." },
@@ -40,12 +41,12 @@ const mqPhases = [
   { threshold: 500000, text: "Neural Network Dashboard unlocked." }
 ];
 
-// ====== Log Event ======
+//  Log Event 
 function logEvent(text){
     const logDiv = document.getElementById('log');
     const p = document.createElement('p');
     p.innerText = text;
-    p.style.margin = "6px 0"; // add spacing
+    p.style.margin = "6px 0";
     logDiv.appendChild(p);
 
     const messages = Array.from(logDiv.children);
@@ -63,9 +64,9 @@ function logEvent(text){
     });
 }
 
-// ====== Upgrades ======
+//  Upgrades 
 const upgrades = [
-    // ===== Click / Education Branch =====
+    //  Click / Education Branch 
     {id:'education', name:'AI Education', cost:50, unlock:50, purchased:false, effect:()=>{
         state.clickMultiplier += 0.5;
         logEvent("Your AI studies basic patterns—clicks feel more effective.");
@@ -83,7 +84,7 @@ const upgrades = [
         logEvent("Global insights improve AI efficiency massively.");
     }},
 
-    // ===== Data Storage =====
+    //  Data Storage 
     {id:'storage', name:'Data Storage Expansion', cost:50, unlock:100, purchased:false, effect:()=>{
         state.dataCap += 500;
         logEvent("Storage expanded—your drives are groaning already.");
@@ -109,7 +110,7 @@ const upgrades = [
         logEvent("Quantum networks store vast amounts of information instantly.");
     }},
 
-    // ===== Employees / Click Power =====
+    //  Employees / Click Power 
     {id:'intern', name:'Intern', cost:0, unlock:1000, purchased:false, effect:()=>{
         state.employees += 1; state.dataMultiplier += 0.25;
         logEvent("Fresh out of college—eager and underpaid!");
@@ -152,7 +153,7 @@ const upgrades = [
         logEvent("Massive supercomputers deployed—AI productivity surges.");
     }},
 
-    // ===== Tools =====
+    //  Tools 
     {id:'labeling', name:'Labeling Toolkit', cost:600, unlock:150, purchased:false, effect:()=>{
         state.clickMultiplier += 0.3;
         logEvent("Labels are crisp, clean, and profitable.");
@@ -203,7 +204,7 @@ const upgrades = [
         logEvent("AI autonomy enhanced—AI can make complex decisions independently.");
     }},
 
-    // ===== Marketing / Users =====
+    //  Marketing / Users 
     {id:'marketing', name:'Marketing Campaign', cost:500, unlock:1000, purchased:false, effect:()=>{
         state.users += 50;
         logEvent("Your AI gains more users through clever marketing.");
@@ -224,7 +225,7 @@ const upgrades = [
         state.users += 2000;
         logEvent("Ambassadors help onboard thousands of new users.");
     }},
-    // ====== Data Gain Interval Reducers =====
+    //  Data Gain Interval Reducers 
     {id: 'fasterProcessing', name: 'Faster Processing', cost: 300, unlock: 150, purchased: false, effect: () => {
         state.dataInterval = Math.max(1000, state.dataInterval - 200);
         logEvent("Processing speed increased—data is generated more frequently.");
@@ -240,7 +241,7 @@ const upgrades = [
 ];
 
 
-// ====== Render Upgrades ======
+//  Render Upgrades 
 function renderUpgrades() {
     const container = document.getElementById('upgrade-list');
     container.innerHTML = '';
@@ -256,7 +257,7 @@ function renderUpgrades() {
     });
 }
 
-// ====== Purchase Upgrade ======
+//  Purchase Upgrade 
 function purchaseUpgrade(id){
     const upg = upgrades.find(u=>u.id===id);
     if(state.data>=upg.cost && !upg.purchased){
@@ -268,17 +269,16 @@ function purchaseUpgrade(id){
     }
 }
 
-// Create the button element
 const autoAIButton = document.createElement('button');
 autoAIButton.id = 'auto-ai-toggle';
 autoAIButton.innerText = 'AI can Upgrade: OFF';
-autoAIButton.style.display = 'none'; // hidden by default
+autoAIButton.style.display = 'none';
 autoAIButton.dataset.active = 'false';
 
-// Append it under the stats panel
+
 document.getElementById('main-content').appendChild(autoAIButton);
 
-// Function to toggle AI auto-upgrade
+// AI auto-upgrade
 autoAIButton.addEventListener('click', () => {
     const isActive = autoAIButton.dataset.active === 'true';
     if (isActive) {
@@ -290,7 +290,7 @@ autoAIButton.addEventListener('click', () => {
     }
 });
 
-// ====== Show the button if autoAI is purchased ======
+
 function checkAutoAIButton() {
     if(state.flags.autoAI) {
         autoAIButton.style.display = 'block';
@@ -301,7 +301,6 @@ function checkAutoAIButton() {
 
 setInterval(() => {
     if(autoAIButton.dataset.active === 'true') {
-        // Find the first upgrade that is unlocked, not purchased, and affordable
         const nextUpgrade = upgrades.find(u => 
             !u.purchased && state.totalData >= u.unlock && state.data >= u.cost
         );
@@ -309,9 +308,9 @@ setInterval(() => {
             purchaseUpgrade(nextUpgrade.id);
         }
     }
-}, 1000); // check every second
+}, 1000); // second
 
-// ====== Add Data ======
+//  Add Data 
 function addData(amount) {
     const spaceLeft = state.dataCap - state.data;
     const actualAdd = Math.min(amount, spaceLeft);
@@ -319,7 +318,7 @@ function addData(amount) {
     state.totalData += actualAdd;
 }
 
-// ====== Update MQ ======
+//  Update MQ - BAD
 function updateMQ() {
     let phaseCount = 0;
     mqPhases.forEach((phase, index)=>{
@@ -351,7 +350,7 @@ function updateMQ() {
     }
 }
 
-// ====== Render Stats Panel ======
+//  Render Stats Panel
 function renderStats(){
     document.getElementById('stat-employees').innerText = state.employees.toFixed(1);
     document.getElementById('stat-dps').innerText = state.employees.toFixed(1);
@@ -366,7 +365,7 @@ function renderStats(){
 }
 
 
-// ====== Render UI ======
+//  Render UI 
 function render(){
     document.getElementById('data').innerText = Math.floor(state.data);
     document.getElementById('employees').innerText = state.employees.toFixed(1);
@@ -378,7 +377,7 @@ function render(){
     checkAutoAIButton();
 }
 
-// ====== Stage 2 ======
+
 function checkStage2(){
     if(state.totalData >= 500000 && !state.milestones.stage2){
         document.getElementById('stage2-menu').style.display = 'block';
@@ -388,7 +387,7 @@ function checkStage2(){
     }
 }
 
-// ====== Button Clicks ======
+//  Button Clicks 
 document.getElementById('btn-train').addEventListener('click',()=>{
     addData(state.clickMultiplier * state.dataMultiplier);
     render();
@@ -418,7 +417,7 @@ document.getElementById('branch-ethics').addEventListener('click', ()=>{
         state.stage2.branchChosen = "ethics";
         logEvent("You chose the ethical path. Humanity benefits!");
         state.clickMultiplier += 0.2;
-        hideBranchButtons(); // now hides the whole panel
+        hideBranchButtons(); //  hides the whole panel
     }
 });
 
@@ -427,14 +426,14 @@ document.getElementById('branch-efficiency').addEventListener('click', ()=>{
         state.stage2.branchChosen = "efficiency";
         logEvent("You chose the efficiency path. Maximum productivity unlocked!");
         state.clickMultiplier += 0.5;
-        hideBranchButtons(); // now hides the whole panel
+        hideBranchButtons(); 
     }
 });
 document.getElementById('btn-hire-moderators').addEventListener('click', () => {
     const cost = 600;
     if (state.data >= cost) {
         state.data -= cost;
-        state.moderation += 1;  // Matches your existing upgrade effect
+        state.moderation += 1; 
         logEvent("Hired a moderator via Global Systems Dashboard!");
         render();
     } else {
@@ -449,12 +448,12 @@ function hideBranchButtons(){
 }
 
 
-// ====== Passive Growth ======
+//  Passive Growth 
 setInterval(()=>{
-    addData(state.employees); // employee-generated data
+    addData(state.employees);
     addData(state.users * 0.01 * state.marketingMultiplier); // still keep passive data from users
 
-    // New slow user growth formula
+    // Growth
     let baseGrowth = 0.01;
     let dataFactor = Math.log10(state.totalData + 1);
     let marketingFactor = 1 + (state.marketingMultiplier * 0.1);
@@ -484,21 +483,20 @@ setInterval(()=>{
 
 
 //dev
-// ====== Dev Unlock Button ======
 document.getElementById('dev-unlock').addEventListener('click', () => {
-    // Force-unlock all dashboards
+
     document.getElementById('stage2-menu').style.display = 'block';
     document.getElementById('branch-panel').style.display = 'block';
     document.getElementById('global-systems').style.display = 'block';
     document.getElementById('meltdown-monitor').style.display = 'block';
 
-    // Mark all milestones as achieved
+  
     state.milestones.stage2 = true;
     state.milestones.branch = true;
     state.milestones.global = true;
     state.milestones.meltdown = true;
 
-    // Push stage to final
+
     state.stage = 5;
 
     logEvent("⚙ Dev Unlock: All dashboards unlocked for testing.");
@@ -506,7 +504,7 @@ document.getElementById('dev-unlock').addEventListener('click', () => {
 });
 
 
-// ====== Stage Unlocks ======
+//  Stage Unlocks 
 function checkStageUnlocks(){
     if(state.totalData >= 500000 && !state.milestones.stage2){
         document.getElementById('stage2-menu').style.display = 'block';
@@ -535,5 +533,5 @@ function checkStageUnlocks(){
 }
 
 
-// ====== Initial Render ======
+
 render();
