@@ -60,24 +60,52 @@ document.getElementById('btn-hire-moderators').addEventListener('click', () => {
     }
 });
 
-// Dev unlock button (for testing)
+// Dev toggle button (for testing)
+let devMode = false;
 document.getElementById('dev-unlock').addEventListener('click', () => {
-    // Force-unlock all dashboards
-    document.getElementById('stage2-menu').style.display = 'block';
-    document.getElementById('branch-panel').style.display = 'block';
-    document.getElementById('global-systems').style.display = 'block';
-    document.getElementById('meltdown-monitor').style.display = 'block';
+    const btn = document.getElementById('dev-unlock');
+    devMode = !devMode;
 
-    // Mark all milestones as achieved
-    state.milestones.stage2 = true;
-    state.milestones.branch = true;
-    state.milestones.global = true;
-    state.milestones.meltdown = true;
+    if (devMode) {
+        // UNLOCK: Force-unlock all dashboards
+        document.getElementById('stage2-menu').style.display = 'block';
+        document.getElementById('branch-panel').style.display = 'block';
+        document.getElementById('global-systems').style.display = 'block';
+        document.getElementById('meltdown-monitor').style.display = 'block';
 
-    // Push stage to final
-    state.stage = 5;
+        // Mark all milestones as achieved
+        state.milestones.stage2 = true;
+        state.milestones.branch = true;
+        state.milestones.global = true;
+        state.milestones.meltdown = true;
 
-    logEvent("⚙ Dev Unlock: All dashboards unlocked for testing.");
+        // Push stage to final
+        state.stage = 5;
+
+        btn.textContent = '⚙ Dev Mode: ON';
+        btn.classList.add('active');
+        logEvent("⚙ Dev Mode ON: All dashboards unlocked.");
+    } else {
+        // LOCK: Hide all dashboards and reset milestones
+        document.getElementById('stage2-menu').style.display = 'none';
+        document.getElementById('branch-panel').style.display = 'none';
+        document.getElementById('global-systems').style.display = 'none';
+        document.getElementById('meltdown-monitor').style.display = 'none';
+
+        // Reset milestones
+        state.milestones.stage2 = false;
+        state.milestones.branch = false;
+        state.milestones.global = false;
+        state.milestones.meltdown = false;
+
+        // Reset stage
+        state.stage = 1;
+
+        btn.textContent = '⚙ Dev Mode: OFF';
+        btn.classList.remove('active');
+        logEvent("⚙ Dev Mode OFF: Dashboards locked.");
+    }
+
     render();
 });
 
