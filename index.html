@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth Engine</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <!-- JavaScript Files -->
+    <script src="js/config.js" defer></script>
+    <script src="js/state.js" defer></script>
+    <script src="js/upgrades.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/stages.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
   <header>
@@ -55,20 +65,19 @@
     </section>
 
     <!-- Stage 4: Global Systems -->
-<section id="global-systems" style="display:none;">
-  <h2>Global Systems Dashboard</h2>
-  <p>Manage worldwide AI expansion.</p>
-  <div>
-    <p>Users: <span id="stat-users">0</span></p>
-    <p>Competitors:
-      <span id="comp-synapse">SynapseCorp: 0</span> |
-      <span id="comp-deepcore">0</span>
-    </p>
-    <p>Moderation Team: <span id="stat-moderation">0</span></p>
-    <button id="btn-hire-moderators">Hire Moderators (Cost: 600 Data)</button>
-  </div>
-</section>
-
+    <section id="global-systems" style="display:none;">
+      <h2>Global Systems Dashboard</h2>
+      <p>Manage worldwide AI expansion.</p>
+      <div>
+        <p>Users: <span id="stat-users">0</span></p>
+        <p>Competitors:
+          <span id="comp-synapse">SynapseCorp: 0</span> |
+          <span id="comp-deepcore">0</span>
+        </p>
+        <p>Moderation Team: <span id="stat-moderation">0</span></p>
+        <button id="btn-hire-moderators">Hire Moderators (Cost: 600 Data)</button>
+      </div>
+    </section>
 
     <!-- Stage 5: Meltdown Monitor -->
     <section id="meltdown-monitor" style="display:none;">
