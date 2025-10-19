@@ -50,12 +50,17 @@ button:focus {
 }
 
 /* Upgrades & Stage Panels */
-#upgrades, #stage2-menu {
-    margin: 20px auto;
-    max-width: 600px;
+#upgrades, #stage2-menu, #branch-panel, #global-systems, #meltdown-monitor {
+    margin: 20px 0;
     background-color: #222;
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
+}
+
+#upgrades h2, #stage2-menu h2, #branch-panel h2,
+#global-systems h2, #meltdown-monitor h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 /* Neural Network Dashboard */
@@ -140,4 +145,58 @@ button:focus {
     background-color: #4CAF50;
     color: white;
     border-color: #45a049;
+}
+
+/* ==============================
+   Responsive Components
+============================== */
+
+/* Tablet adjustments */
+@media (max-width: 1200px) {
+    #btn-train {
+        font-size: 20px;
+        padding: 16px 32px;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 1000px) {
+    #btn-train {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    #branch-choices {
+        flex-direction: column;
+    }
+
+    #branch-choices button {
+        width: 100%;
+    }
+
+    .dev-toggle {
+        font-size: 12px;
+        padding: 10px 16px;
+        bottom: 10px;
+        left: 10px;
+    }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 600px) {
+    #btn-train {
+        font-size: 18px;
+        padding: 14px 24px;
+    }
+
+    .upgrade-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    #nnd-upgrades button,
+    #btn-hire-moderators {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
 }

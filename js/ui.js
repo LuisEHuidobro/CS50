@@ -8,18 +8,18 @@ function logEvent(text) {
     p.style.margin = "6px 0";
     logDiv.appendChild(p);
 
+    // Keep only the last 5 messages
     const messages = Array.from(logDiv.children);
-    messages.forEach(msg => {
-        const rect = msg.getBoundingClientRect();
-        const parentRect = logDiv.getBoundingClientRect();
-        const distanceFromTop = rect.top - parentRect.top;
-        if (distanceFromTop < 100) msg.style.opacity = Math.max(0, distanceFromTop / 100);
-        else msg.style.opacity = 1;
-    });
-    messages.forEach(msg => {
-        const rect = msg.getBoundingClientRect();
-        const parentRect = logDiv.getBoundingClientRect();
-        if (rect.bottom < parentRect.top) logDiv.removeChild(msg);
+    while (messages.length > 5) {
+        logDiv.removeChild(messages[0]);
+    }
+
+    // Apply fade effect: brightest at bottom (newest)
+    const currentMessages = Array.from(logDiv.children);
+    currentMessages.forEach((msg, index) => {
+        const positionFromEnd = currentMessages.length - 1 - index;
+        const opacity = 1.0 - (positionFromEnd * 0.2);
+        msg.style.opacity = opacity;
     });
 }
 
