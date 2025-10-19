@@ -3,8 +3,17 @@
 // ====== Event Listeners ======
 
 // Train button
-document.getElementById('btn-train').addEventListener('click', () => {
-    addData(state.clickMultiplier * state.dataMultiplier);
+document.getElementById('btn-train').addEventListener('click', (event) => {
+    const dataGained = state.clickMultiplier * state.dataMultiplier;
+    addData(dataGained);
+
+    // Get button position for floating text
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2 + (Math.random() * 40 - 20);
+    const y = rect.top + rect.height / 2 - 20;
+
+    showFloatingText(`+${dataGained.toFixed(1)}`, x, y);
     render();
 });
 

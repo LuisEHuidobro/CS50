@@ -81,6 +81,12 @@ function initializeAutoAI() {
 function startPassiveGrowth() {
     // Base passive interval (1 second)
     setInterval(() => {
+        // Calculate actual DPS based on stored data change
+        const currentData = state.data;
+        const dataDifference = currentData - state.previousData;
+        state.actualDPS = Math.max(0, dataDifference); // Can't be negative
+        state.previousData = currentData;
+
         addData(state.employees);
         addData(state.users * 0.01 * state.marketingMultiplier);
 

@@ -1,5 +1,21 @@
 // ====== UI Rendering Functions ======
 
+// ====== Floating Text Effect ======
+function showFloatingText(text, x, y) {
+    const floatingText = document.createElement('div');
+    floatingText.className = 'floating-text';
+    floatingText.innerText = text;
+    floatingText.style.left = x + 'px';
+    floatingText.style.top = y + 'px';
+
+    document.body.appendChild(floatingText);
+
+    // Remove element after animation completes
+    setTimeout(() => {
+        document.body.removeChild(floatingText);
+    }, 1500);
+}
+
 // ====== Log Event ======
 function logEvent(text) {
     const logDiv = document.getElementById('log');
@@ -42,7 +58,7 @@ function renderUpgrades() {
 // ====== Render Stats Panel ======
 function renderStats() {
     document.getElementById('stat-employees').innerText = state.employees.toFixed(1);
-    document.getElementById('stat-dps').innerText = state.employees.toFixed(1);
+    document.getElementById('stat-dps').innerText = state.actualDPS.toFixed(1);
     document.getElementById('stat-click').innerText = state.clickMultiplier.toFixed(1);
     document.getElementById('stat-total').innerText = state.totalData.toFixed(0);
     document.getElementById('stat-data').innerText = Math.floor(state.data);
@@ -64,7 +80,7 @@ function checkAutoAIButton() {
 
 // ====== Main Render ======
 function render() {
-    document.getElementById('data').innerText = Math.floor(state.data);
+    document.getElementById('data').innerText = state.data.toFixed(1);
     document.getElementById('employees').innerText = state.employees.toFixed(1);
     updateMQ();
     document.getElementById('mq').innerText = state.mqDisplay;

@@ -25,19 +25,33 @@ h1, h2, h3, p {
 ============================== */
 
 header {
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #222;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    align-items: center;
 }
 
 header h1 {
-    flex-basis: 100%;
+    grid-column: 1 / -1;
     text-align: left;
-    margin: 5px 0;
+    margin: 0;
+}
+
+#resources {
+    display: flex;
+    align-items: center;
+    grid-column: 1;
+    grid-row: 2;
 }
 
 #resources span {
     margin: 0 10px;
+}
+
+header .dev-toggle {
+    grid-column: 2;
+    grid-row: 2;
 }

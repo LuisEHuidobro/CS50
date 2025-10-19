@@ -27,7 +27,9 @@ let state = {
     marketingMultiplier: 1,
     dataMultiplier: 1,
     dataInterval: TIMING.DEFAULT_DATA_INTERVAL,
-    passiveMultiplier: 1
+    passiveMultiplier: 1,
+    previousData: 0,
+    actualDPS: 0
 };
 
 // Stage 2 state
