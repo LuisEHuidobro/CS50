@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Engine</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <!-- JavaScript Files -->
+    <script src="js/config.js" defer></script>
+    <script src="js/state.js" defer></script>
+    <script src="js/upgrades.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/stages.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Growth Engine AI</h1>
+    <div id="resources">
+      <span>Data: <span id="data">0</span></span>
+      <span>Employees: <span id="employees">0</span></span>
+      <span>Model Quality: <span id="mq">0%</span></span>
+    </div>
+    <button id="dev-unlock" class="dev-toggle">⚙ Dev Mode: OFF</button>
+  </header>
+
+  <!-- Stats Panel (Left Sidebar) -->
+  <section id="stats-panel">
+    <h2>Stats</h2>
+    <p>Employees: <span id="stat-employees">0</span></p>
+    <p>DPS: <span id="stat-dps">0</span></p>
+    <p>Click Power: <span id="stat-click">0</span></p>
+    <p>Total Data: <span id="stat-total">0</span></p>
+    <p>Stored Data: <span id="stat-data">0</span></p>
+    <p>Data Cap: <span id="stat-cap">0</span></p>
+  </section>
+
+  <main id="main-content">
+    <button id="btn-train">Train AI</button>
+
+    <!-- Stage 1: Upgrades -->
+    <section id="upgrades">
+      <h2>Upgrades</h2>
+      <div id="upgrade-list"></div>
+    </section>
+
+    <!-- Stage 2: Neural Network Dashboard -->
+    <section id="stage2-menu" style="display:none;">
+      <h2>Neural Network Dashboard</h2>
+      <p>Advanced training systems unlocked!</p>
+      <button id="exp-track-btn">Experimental Tracking</button>
+    </section>
+
+    <!-- Stage 3: Branch Decision -->
+    <section id="branch-panel" style="display:none;">
+      <h2>AI Philosophy Choice</h2>
+      <p>Your AI begins to question its purpose...</p>
+      <div id="branch-choices">
+        <button id="branch-ethics">Prioritize Ethics</button>
+        <button id="branch-efficiency">Prioritize Efficiency</button>
+      </div>
+    </section>
+
+    <!-- Stage 4: Global Systems -->
+    <section id="global-systems" style="display:none;">
+      <h2>Global Systems Dashboard</h2>
+      <p>Manage worldwide AI expansion.</p>
+      <div>
+        <p>Users: <span id="stat-users">0</span></p>
+        <p>Competitors:
+          <span id="comp-synapse">SynapseCorp: 0</span> |
+          <span id="comp-deepcore">0</span>
+        </p>
+        <p>Moderation Team: <span id="stat-moderation">0</span></p>
+        <button id="btn-hire-moderators">Hire Moderators (Cost: 600 Data)</button>
+      </div>
+    </section>
+
+    <!-- Stage 5: Meltdown Monitor -->
+    <section id="meltdown-monitor" style="display:none;">
+      <h2>⚠ System Instability</h2>
+      <p>Containment failing... model quality approaching singularity.</p>
+    </section>
+  </main>
+
+  <!-- Story Log (Right Sidebar) -->
+  <section id="story-log">
+    <h2>Log</h2>
+    <div id="log"></div>
+  </section>
+</body>
+</html>
