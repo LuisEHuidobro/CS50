@@ -17,7 +17,7 @@ let state = {
     },
     milestones: {},
     clickMultiplier: 1,
-    dataCap: 10000,
+    dataCap: 1000,
     users: 0,
     moderation: 1,
     aiCompetitors: [
